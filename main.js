@@ -40,6 +40,17 @@ for(var i=0;i <AddCart.length;i++){
 var button =AddCart[i]
 button.addEventListener('click',addcartclicked);
 }
+//Buy button work
+document.getElementsByClassName("btn-buy")[0].addEventListener("click",buyButtonClicked);
+}
+//buy button
+function buyButtonClicked(){
+    alert("You Order is Placed")
+    var Cartcontent=document.getElementsByClassName("cart-content")[0]
+    while(Cartcontent,hasChildNodes()){
+        Cartcontent.removeChild(Cartcontent.firstChild);
+    }
+    updatetotal();
 }
 //Remove Item from cart
 function removecartitem(event){
@@ -78,19 +89,19 @@ function addproductToCart(title,price,productimg){
         return;
         }
     }
-    var CartboxContent =`
-                         <img src="KS(productimg)" alt="" class="cart-img">
+    var CartboxContent = `
+                         <img src="${productimg}" alt="" class="cart-img">
                          <div class="detial-box">
                          <div class="cart-product-title">
-                         KS{title}
+                         ${title}
                          </div>
-                         <div class="cart-price">KS{price}</div>
+                         <div class="cart-price">${price}</div>
                          <input type="number"value="1" class="cart-quantity" >
                          </div>
                          <!--Remove cart-->
                          <i class='bx bxs-trash-alt cart-remove' ></i>`;
              
-cartShopBox.innerHTML=CartboxContent;
+cartShopBox.innerHTML= CartboxContent;
 cartItem.append(cartShopBox);
 cartShopBox.getElementsByClassName("cart-remove")[0].addEventListener("click",removecartitem);
 cartShopBox.getElementsByClassName("cart-quantity")[0].addEventListener("change",quantityChanged);
@@ -111,9 +122,10 @@ function updatetotal(){
         var price=parseFloat(priceElement.innerText.replace("KS",""))
         var quantity =quantityElement.value 
         total=total+(price*quantity); 
+    }
         // If price Contain some Cents Value 
         total =Math.round(total*100)/100;
 
         document.getElementsByClassName('total-price')[0].innerText="KS" +total;
-    }
+    
 }
